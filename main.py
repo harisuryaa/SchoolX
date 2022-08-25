@@ -47,4 +47,4 @@ def feeds():
     return render_template("feeds.html")
 
 if __name__ == '__main__':
-    app.run(debug=True, host='10.20.32.179')
+    app.run(debug=True)
