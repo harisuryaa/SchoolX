@@ -9,6 +9,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 Bootstrap(app)
 
+from test import Img
+
 
 
 class Personal_data(db.Model):
@@ -37,9 +39,12 @@ def receive_data():
         return render_template('profile.html', data=profile)
     return render_template("index.html")
 
+
 @app.route("/feeds")
 def feeds():
-    return render_template("feeds.html")
+    images = db.session.query(Img).first()
+    img = images.mimetype
+    return render_template("feeds.html",img=img)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='10.20.32.36')
