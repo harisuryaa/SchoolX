@@ -1,0 +1,66 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}Profile{% endblock %}
+{% block styles %}
+{{ super() }}
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style_profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<aside class="profile-card">
+  <header>
+    <!-- here’s the avatar -->
+    <a target="_blank" href="">
+      <img src='{{data.img_url}}' class="hoverZoomLink">
+    </a>
+
+    <!-- the username -->
+    <h1>
+            {{data.name}}
+          </h1>
+
+    <!-- and role or location -->
+    <h2>
+            Year: {{data.year}} || Dept: {{data.department}}
+          </h2>
+
+  </header>
+
+  <!-- bit of a bio; who are you? -->
+  <div class="profile-bio">
+
+    <p>
+      Contact: {{data.phone_number}}<br>
+      UG Degree: {{data.educational_bg}}
+
+    </p>
+
+  </div>
+  <!-- some social links to show off -->
+  <ul class="profile-social-links">
+    <li>
+      <a target="_blank" href="{{data.ln_url}}">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a target="_blank" href="{{data.ln_url}}">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a target="_blank" href="{{data.ln_url}}">
+        <i class="fa fa-github"></i>
+      </a>
+    </li>
+    <li>
+      <a target="_blank" href="{{data.ln_url}}">
+
+        <i class="fa fa-behance"></i>
+      </a>
+    </li>
+  </ul>
+</aside>
+{% endblock %}
