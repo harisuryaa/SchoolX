@@ -2,11 +2,6 @@ from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, DateTimeField
-from wtforms.validators import DataRequired, URL
-import csv
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 app.config['SQLALCHEMY_DATABASE_URI']= "sqlite:///ssb_neww.db"
