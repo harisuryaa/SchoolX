@@ -1,66 +1,121 @@
 {% extends 'bootstrap/base.html' %}
+{%import "bootstrap/wtf.html" as wtf%}
 
 {% block title %}Profile{% endblock %}
 {% block styles %}
 {{ super() }}
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style_profile.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
 {% endblock %}
 
 {% block content %}
-<aside class="profile-card">
+{% include "header.html" %}
+
   <header>
-    <!-- here’s the avatar -->
-    <a target="_blank" href="">
-      <img src='{{data.img_url}}' class="hoverZoomLink">
-    </a>
 
-    <!-- the username -->
-    <h1>
-            {{data.name}}
-          </h1>
+	<div class="container">
 
-    <!-- and role or location -->
-    <h2>
-            Year: {{data.year}} || Dept: {{data.department}}
-          </h2>
+		<div class="profile">
 
-  </header>
+			<div class="profile-image">
 
-  <!-- bit of a bio; who are you? -->
-  <div class="profile-bio">
+				<img src="{{image_file}}" alt="">
 
-    <p>
-      Contact: {{data.phone_number}}<br>
-      UG Degree: {{data.educational_bg}}
+			</div>
 
-    </p>
+			<div class="profile-user-settings">
 
-  </div>
-  <!-- some social links to show off -->
-  <ul class="profile-social-links">
-    <li>
-      <a target="_blank" href="{{data.ln_url}}">
-        <i class="fa fa-facebook"></i>
-      </a>
-    </li>
-    <li>
-      <a target="_blank" href="{{data.ln_url}}">
-        <i class="fa fa-twitter"></i>
-      </a>
-    </li>
-    <li>
-      <a target="_blank" href="{{data.ln_url}}">
-        <i class="fa fa-github"></i>
-      </a>
-    </li>
-    <li>
-      <a target="_blank" href="{{data.ln_url}}">
+				<h1 class="profile-user-name" style="padding-top: 60px;">janedoe_</h1>
 
-        <i class="fa fa-behance"></i>
-      </a>
-    </li>
-  </ul>
-</aside>
+				<a href="{{url_for('edit')}}"><button class="btn profile-edit-btn">Edit Profile</button></a>
+
+			<a href="{{url_for('post')}}" >	<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button></a>
+
+			</div>
+
+			<div class="profile-stats">
+
+				<ul>
+					<li><span class="profile-stat-count">164</span> posts</li>
+					<li><span class="profile-stat-count">188</span> followers</li>
+					<li><span class="profile-stat-count">206</span> following</li>
+				</ul>
+
+			</div>
+
+			<div class="profile-bio">
+
+				<p><span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️</p>
+
+			</div>
+			{%if edit:%}
+			<div>
+				{{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+			</div>
+			{%elif post:%}
+			<div>
+				{{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+			</div>
+			{%endif%}
+
+		</div>
+		<!-- End of profile section -->
+
+	</div>
+	<!-- End of container -->
+
+</header>
+
+<main>
+
+	<div class="container">
+
+		<div class="gallery">
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			{%for photo in photos:%}
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="{{photo}}" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 89</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 5</li>
+					</ul>
+
+				</div>
+
+			</div>
+			{%endfor%}
+
+
+			</div>
+
+		</div>
+		<!-- End of gallery -->
+
+<!--		<div class="loader"></div>-->
+
+	</div>
+	<!-- End of container -->
+
+</main>
+
+  {% include "footer.html" %}
 {% endblock %}
